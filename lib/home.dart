@@ -8,6 +8,8 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+  TextEditingController numbersInput = TextEditingController();
+
   List<Widget> numericButtons = [];
 
   @override
@@ -20,28 +22,19 @@ class _Home extends State<Home> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(bottom: 10),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
                 child: TextField(
+                  textAlign: TextAlign.end,
+                  controller: numbersInput,
                   keyboardType: TextInputType.multiline,
                   maxLines: 4,
                 ),
               ),
-              buttons()
+              buttons(),
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Center(
-            child: Text(
-          '=',
-          style: TextStyle(
-            fontSize: 20,
-            height: 1,
-          ),
-        )),
-        onPressed: () {},
       ),
     );
   }
@@ -51,7 +44,15 @@ class _Home extends State<Home> {
       numericButtons.add(
         Expanded(
           child: ElevatedButton(
-            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+                shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            )),
+            onPressed: () {
+              setState(() {
+                numbersInput.text += i.toString();
+              });
+            },
             child: Text(i.toString()),
           ),
         ),
@@ -60,21 +61,160 @@ class _Home extends State<Home> {
   }
 
   Widget buttons() {
+    ButtonStyle style = ElevatedButton.styleFrom(
+        shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(5)),
+    ));
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Row(children: [
+          Expanded(
+              child: ElevatedButton(
+            style: style,
+            onPressed: () {
+              setState(() {
+                numbersInput.text += ' %\n';
+              });
+            },
+            child: const Text('%'),
+          )),
+          Expanded(
+              child: ElevatedButton(
+            style: style,
+            onPressed: () {
+              setState(() {
+                numbersInput.text += '';
+              });
+            },
+            child: const Text('CE'),
+          )),
+          Expanded(
+              child: ElevatedButton(
+            style: style,
+            onPressed: () {
+              setState(() {
+                numbersInput.text += '';
+              });
+            },
+            child: const Text('C'),
+          )),
+          Expanded(
+              child: ElevatedButton(
+            style: style,
+            onPressed: () {
+              setState(() {
+                numbersInput.text = numbersInput.text
+                    .substring(0, numbersInput.text.length - 1);
+              });
+            },
+            onLongPress: () {
+              setState(() {
+                numbersInput.text = '';
+              });
+            },
+            child: const Icon(Icons.drive_file_move_rtl_outlined),
+          ))
+        ]),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: numericButtons.sublist(0, 3),
+          children: [
+            numericButtons[6],
+            numericButtons[7],
+            numericButtons[8],
+            Expanded(
+                child: ElevatedButton(
+              style: style,
+              onPressed: () {
+                setState(() {
+                  numbersInput.text += '';
+                });
+              },
+              child: const Text('x'),
+            )),
+          ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: numericButtons.sublist(3, 6),
+          children: [
+            numericButtons[3],
+            numericButtons[4],
+            numericButtons[5],
+            Expanded(
+                child: ElevatedButton(
+              style: style,
+              onPressed: () {
+                setState(() {
+                  numbersInput.text += '';
+                });
+              },
+              child: const Text('-'),
+            )),
+          ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: numericButtons.sublist(6, 9),
+          children: [
+            numericButtons[0],
+            numericButtons[1],
+            numericButtons[2],
+            Expanded(
+                child: ElevatedButton(
+              style: style,
+              onPressed: () {
+                setState(() {
+                  numbersInput.text += '';
+                });
+              },
+              child: const Text('+'),
+            )),
+          ],
         ),
+        Row(
+          children: [
+            Expanded(
+                child: ElevatedButton(
+              style: style,
+              onPressed: () {
+                setState(() {
+                  numbersInput.text += '';
+                });
+              },
+              child: const Text('+/-'),
+            )),
+            Expanded(
+                child: ElevatedButton(
+              style: style,
+              onPressed: () {
+                setState(() {
+                  numbersInput.text += '';
+                });
+              },
+              child: const Text('0'),
+            )),
+            Expanded(
+                child: ElevatedButton(
+              style: style,
+              onPressed: () {
+                setState(() {
+                  numbersInput.text += '';
+                });
+              },
+              child: const Text('.'),
+            )),
+            Expanded(
+                child: ElevatedButton(
+              style: style,
+              onPressed: () {
+                setState(() {
+                  numbersInput.text += '';
+                });
+              },
+              child: const Text('='),
+            )),
+          ],
+        )
       ],
     );
   }
