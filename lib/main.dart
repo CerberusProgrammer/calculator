@@ -7,7 +7,7 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Calculator',
-      theme: ThemeData(
+      theme: ThemeData.dark(
         useMaterial3: true,
       ),
       home: const Home(),

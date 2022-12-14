@@ -8,24 +8,29 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+  List<Widget> numericButtons = [];
+
   @override
   Widget build(BuildContext context) {
+    generateNumericButtons();
+
     return Scaffold(
-      body: Row(
-        children: [
-          OutlinedButton(
-            onPressed: () {},
-            child: Text('1'),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(bottom: 10),
+                child: TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 4,
+                ),
+              ),
+              buttons()
+            ],
           ),
-          OutlinedButton(
-            onPressed: () {},
-            child: Text('1'),
-          ),
-          OutlinedButton(
-            onPressed: () {},
-            child: Text('1'),
-          ),
-        ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Center(
@@ -38,6 +43,39 @@ class _Home extends State<Home> {
         )),
         onPressed: () {},
       ),
+    );
+  }
+
+  void generateNumericButtons() {
+    for (int i = 1; i < 10; ++i) {
+      numericButtons.add(
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Text(i.toString()),
+          ),
+        ),
+      );
+    }
+  }
+
+  Widget buttons() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: numericButtons.sublist(0, 3),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: numericButtons.sublist(3, 6),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: numericButtons.sublist(6, 9),
+        ),
+      ],
     );
   }
 }
