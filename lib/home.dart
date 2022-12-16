@@ -21,6 +21,7 @@ class _Home extends State<Home> {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
@@ -85,7 +86,7 @@ class _Home extends State<Home> {
             style: style,
             onPressed: () {
               setState(() {
-                numbersInput.text += '';
+                numbersInput.text = '';
               });
             },
             child: const Text('CE'),
@@ -128,7 +129,7 @@ class _Home extends State<Home> {
               style: style,
               onPressed: () {
                 setState(() {
-                  numbersInput.text += '';
+                  numbersInput.text += ' x\n';
                 });
               },
               child: const Text('x'),
@@ -146,7 +147,7 @@ class _Home extends State<Home> {
               style: style,
               onPressed: () {
                 setState(() {
-                  numbersInput.text += '';
+                  numbersInput.text += ' -\n';
                 });
               },
               child: const Text('-'),
@@ -164,7 +165,7 @@ class _Home extends State<Home> {
               style: style,
               onPressed: () {
                 setState(() {
-                  numbersInput.text += '';
+                  numbersInput.text += ' +\n';
                 });
               },
               child: const Text('+'),
@@ -174,25 +175,16 @@ class _Home extends State<Home> {
         Row(
           children: [
             Expanded(
+                flex: 2,
                 child: ElevatedButton(
-              style: style,
-              onPressed: () {
-                setState(() {
-                  numbersInput.text += '';
-                });
-              },
-              child: const Text('+/-'),
-            )),
-            Expanded(
-                child: ElevatedButton(
-              style: style,
-              onPressed: () {
-                setState(() {
-                  numbersInput.text += '';
-                });
-              },
-              child: const Text('0'),
-            )),
+                  style: style,
+                  onPressed: () {
+                    setState(() {
+                      numbersInput.text += '0';
+                    });
+                  },
+                  child: const Text('0'),
+                )),
             Expanded(
                 child: ElevatedButton(
               style: style,
